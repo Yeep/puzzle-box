@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Welcome User{% endblock %}
+{% block header %}Welcome {{ session['username'] }}{% endblock %}
+{% block content %}
+    <p>Unfortunately you are a normal user and can't do anything here.</p>
+{% endblock %}
