@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}Directory Listing{% endblock %}
+{% block header %}Directory Listing Example{% endblock %}
+{% block content %}
+    <p>The server-side code here is vulnerable to directory listing. Use it to gain access to the underlying source code.</p>
+    <form action="/login" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"/>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"/>
+        <input type="submit" value="Log In"/>
+    </form>
+{% endblock %}
