@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Gallery{% endblock %}
+{% block header %}A Picture Gallery{% endblock %}
+{% block content %}
+    <p>{{ path }}</p>
+    {% for image in images %}
+    <p><img src="{{ path }}/{{ image }}"/></p>
+    {% else %}
+    <p>No pictures here.</p>
+    {% endfor %}
+{% endblock %}
