@@ -2,5 +2,24 @@
 {% block title %}Welcome User{% endblock %}
 {% block header %}Welcome {{ session['username'] }}{% endblock %}
 {% block content %}
-    <p>Unfortunately you are a normal user and can't do anything here.</p>
+    <p>Welcome normal user. Please leave a comment.</p>
+    <form action="/user" method="post">
+        <label for="comment">Comment</label>
+        <textarea id="comment" name="comment"></textarea>
+        <input type="submit" value="Post"/>
+    </form>
+    <p>
+        <table>
+        {% for comment in comments %}
+        <div>
+            <tr>
+                <td>{{ comment[0] }} said:</td>
+                <td>{{ comment[1] }}</td>
+            </tr>
+        </div>
+        {% else %}
+            <tr><td>Nobody has left a comment yet.</td></tr>
+        {% endfor %}
+        </table>
+    </p>
 {% endblock %}

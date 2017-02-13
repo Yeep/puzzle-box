@@ -3,6 +3,8 @@ from subprocess import call
 import sqlite3
 import bcrypt
 
+DB_FILE = 'level1.sqlite'
+
 app = Flask(__name__)
 app.secret_key = 'ThisIsASecretKey'
 
@@ -12,7 +14,7 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    db = sqlite3.connect('level1.sqlite')
+    db = sqlite3.connect(DB_FILE)
     db.text_factory = str
     cursor = db.cursor()
     cursor.execute("SELECT id, name, password, is_admin FROM users WHERE name='{0}'".format(request.form['username']))
@@ -39,14 +41,25 @@ def login():
 
     return render_template('level1/login.html', name=first_user[1])
 
-@app.route('/user')
+@app.route('/user', methods=['GET', 'POST'])
 def user():
     if session['is_admin']:
         return redirect(url_for('admin'))
     if 'username' not in session:
         return redirect(url_for('/'))
 
-    return render_template('level1/user.html')
+    db = sqlite3.connect(DB_FILE)
+    db.text_factory = str
+    cursor = db.cursor()
+
+    if request.method == 'POST':
+        cursor.executescript("INSERT INTO comments (user, content) VALUES ('{0}', '{1}')".format(session['username'], request.form['comment']))
+
+    cursor.execute("SELECT user, content FROM comments ORDER BY id ASC")
+
+    comments = cursor.fetchall()
+
+    return render_template('level1/user.html', comments=comments)
 
 @app.route('/admin')
 def admin():
