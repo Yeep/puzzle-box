@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from subprocess import call
 import sqlite3
 import bcrypt
+import socket
 
 DB_FILE = 'level1.sqlite'
 

@@ -13,11 +13,11 @@ sudo systemctl daemon-reload
 
 # Splash should be started
 sudo systemctl enable box1_splash.service
-sudo systemctl restart box1_splash.service
+sudo systemctl start box1_splash.service
 
 # Level 1 should be started
 sudo systemctl enable box1_level1.service
-sudo systemctl restart box1_level1.service
+sudo systemctl start box1_level1.service
 
 # Level 2 should be stopped
 sudo systemctl disable box1_level1.service
