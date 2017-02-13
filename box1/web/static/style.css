@@ -22,3 +22,16 @@ div#footer {
     right: 0;
     font-size: 0.7em;
 }
+
+a {
+    color #0F0;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #0F0;
+}
+
+a:visited {
+    color: #0F0;
+}
