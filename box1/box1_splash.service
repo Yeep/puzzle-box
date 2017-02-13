@@ -8,8 +8,6 @@ User=puzzlebox
 Group=puzzlebox
 WorkingDirectory=/home/puzzlebox/box1/web/
 ExecStart=/usr/bin/python /home/puzzlebox/box1/web/splash.py
-StandardOutput=syslog
-StandardError=syslog
 Restart=always
 RestartSec=2
 

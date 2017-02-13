@@ -12,10 +12,10 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    db = sqlite3.connect('database.sqlite')
+    db = sqlite3.connect('level1.sqlite')
     db.text_factory = str
     cursor = db.cursor()
-    cursor.executescript("SELECT id, name, password, is_admin FROM users WHERE name='{0}'".format(request.form['username']))
+    cursor.execute("SELECT id, name, password, is_admin FROM users WHERE name='{0}'".format(request.form['username']))
 
     users = cursor.fetchall()
 
@@ -58,7 +58,7 @@ def admin():
     call(["sudo", "systemctl", "restart", "box1_level2.service"])
     call(["sudo", "systemctl", "enable", "box1_level2.service"])
     
-    return render_template('level1/admin.html')
+    return render_template('level1/admin.html', hostname=socket.gethostname(), port=1338)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=1337)
