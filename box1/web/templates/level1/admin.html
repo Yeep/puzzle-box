@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Welcome Admin{% endblock %}
+{% block header %}Welcome {{ session['username'] }}{% endblock %}
+{% block content %}
+    <p>Congratulations, you are an administrator.</p>
+    <p><a href="http://{{ hostname }}:{{ port }}/">Level 2</a> is now running.</p>
+{% endblock %}

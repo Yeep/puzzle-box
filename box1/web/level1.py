@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from subprocess import call
 import sqlite3
 import bcrypt
 
@@ -7,7 +8,7 @@ app.secret_key = 'ThisIsASecretKey'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('level1/index.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -19,7 +20,7 @@ def login():
     users = cursor.fetchall()
 
     if len(users) <= 0:
-        return render_template('login_fail.html', comment="Bad username")
+        return render_template('level1/login_fail.html', comment="Bad username")
 
     first_user = users[0]
     (id, username, password, is_admin) = first_user
@@ -34,9 +35,9 @@ def login():
         else:
             return redirect(url_for('user'))
     else:
-        return render_template('login_fail.html', comment="Bad password")
+        return render_template('level1/login_fail.html', comment="Bad password")
 
-    return render_template('login.html', name=first_user[1])
+    return render_template('level1/login.html', name=first_user[1])
 
 @app.route('/user')
 def user():
@@ -45,7 +46,7 @@ def user():
     if 'username' not in session:
         return redirect(url_for('/'))
 
-    return render_template('user.html')
+    return render_template('level1/user.html')
 
 @app.route('/admin')
 def admin():
@@ -54,7 +55,10 @@ def admin():
     if 'username' not in session:
         return redirect(url_for('/'))
 
-    return render_template('admin.html')
+    call(["sudo", "systemctl", "restart", "box1_level2.service"])
+    call(["sudo", "systemctl", "enable", "box1_level2.service"])
+    
+    return render_template('level1/admin.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=1337)

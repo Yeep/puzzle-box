@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Puzzle Box{% endblock %}
+{% block header %}Welcome to the Puzzle Box{% endblock %}
+{% block content %}
+    <p>This box is vulnerable to a selection of common security flaws. Work your way through the puzzles to unlock the box.</p>
+    <ul>
+        <li>Please only use software hacks to get in. Don't force the box open.</li>
+        <li>You won't need to exploit any published vulnerabilities in public software.</li>
+        <li>If you mess up, unplug the power and everything should reset to the start.</li>
+    </ul>
+    <p><a href="http://{{ hostname }}:{{ port }}/">Get Started!</a></p>
+{% endblock %}

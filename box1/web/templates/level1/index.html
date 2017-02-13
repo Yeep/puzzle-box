@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block title %}Level 1{% endblock %}
+{% block header %}Level 1{% endblock %}
+{% block content %}
+    <p>Welcome to level 1. Please log in.</p>
+    <form action="/login" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"/>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"/>
+        <input type="submit" value="Log In"/>
+    </form>
+{% endblock %}

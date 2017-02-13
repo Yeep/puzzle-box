@@ -1,0 +1,17 @@
+[Unit]
+Description=Level 2 for Puzzle Box 1
+After=syslog.target
+
+[Service]
+Type=simple
+User=puzzlebox
+Group=puzzlebox
+WorkingDirectory=/home/puzzlebox/box1/web/
+ExecStart=/usr/bin/python /home/puzzlebox/box1/web/level2.py
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=box1_level2.target
