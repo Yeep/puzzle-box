@@ -2,7 +2,7 @@
 
 # Pre-requisites
 sudo apt-get install python-pip python-bcrypt
-sudo pip install flask
+sudo pip install flask flask_restful
 
 # Create the level 1 database
 python level1_db.py
