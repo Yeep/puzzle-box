@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from base64 import b64encode
 from os import listdir
 from os.path import isfile, join
 from flask_restful import Resource, Api
@@ -16,12 +17,12 @@ def gallery():
 
 def createFileResponse(path, file):
     with open(join(path, file), "rb") as f:
-        data = f.read().encode("base64")
+        data = b64encode(f.read())
     return {'name': file, 'data': data}
 
 class DirectoryListing(Resource):
     def get(self, path = '.'):
-        os_path = join('static', 'pictures', path)
+        os_path = join('static', path)
         images = [f for f in listdir(os_path) if (isfile(join(os_path, f)))]
         return list(map(lambda image: createFileResponse(os_path, image), images))
 

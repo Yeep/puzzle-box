@@ -1,11 +1,14 @@
 #!/bin/bash
 
 # Pre-requisites
-sudo apt-get install python-pip python-bcrypt
+sudo apt-get install python-pip python-bcrypt python-dev
 sudo pip install flask flask_restful
 
 # Create the level 1 database
 python level1_db.py
+
+# Create the level 2 password file
+python level2_secrets.py
 
 # Copy service files
 sudo cp box1_splash.service box1_level1.service box1_level2.service /etc/systemd/system

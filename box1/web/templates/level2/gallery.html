@@ -2,14 +2,15 @@
 {% block title %}Gallery{% endblock %}
 {% block head %}
     {{ super() }}
-    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}" type="text/javascript" />
+    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}" type="application/javascript"></script>
+    <script src="{{ url_for('static', filename='gallery.js') }}" type="application/javascript"></script>
+    <script language="javascript">
+        $(document).ready(function() {
+            showGallery('pictures', $("#gallery").get(0));
+        });
+    </script>
 {% endblock %}
 {% block header %}A Picture Gallery{% endblock %}
 {% block content %}
-    <p>{{ path }}</p>
-    {% for image in images %}
-    <p><img src="{{ path }}/{{ image }}"/></p>
-    {% else %}
-    <p>No pictures here.</p>
-    {% endfor %}
+    <div id="gallery"/>
 {% endblock %}
