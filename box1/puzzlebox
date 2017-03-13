@@ -9,3 +9,6 @@ puzzlebox ALL=(ALL) NOPASSWD: /bin/systemctl restart box1_level[0-9]*.service
 puzzlebox ALL=(ALL) NOPASSWD: /bin/systemctl stop box1_level[0-9]*.service
 puzzlebox ALL=(ALL) NOPASSWD: /bin/systemctl disable box1_level[0-9]*.service
 puzzlebox ALL=(ALL) NOPASSWD: /bin/systemctl enable box1_level[0-9]*.service
+
+puzzlebox ALL=(ALL) NOPASSWD: ~/puzzle-box/box1/open_box
+puzzlebox ALL=(ALL) NOPASSWD: ~/puzzle-box/box1/close_box

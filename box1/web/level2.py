@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from base64 import b64encode
+from subprocess import call
 from os import listdir
 from os.path import isfile, join
 from flask_restful import Resource, Api
 
 app = Flask(__name__)
+app.secret_key = 'AnotherSecretKey'
 api = Api(app)
 
 @app.route('/')
@@ -14,6 +16,20 @@ def index():
 @app.route('/gallery')
 def gallery():
     return render_template('level2/gallery.html')
+
+@app.route('/winner', methods=['POST'])
+def winner():
+    user_password = request.form['password']
+
+    with open('secrets/password') as password_file:
+        password = password_file.read()
+
+    if password == user_password:
+        session['secret'] = True
+        return render_template('level2/winner.html')
+    else:
+        session['secret'] = False
+        return render_template('level2/nope.html')
 
 def createFileResponse(path, file):
     with open(join(path, file), "rb") as f:
@@ -26,7 +42,19 @@ class DirectoryListing(Resource):
         images = [f for f in listdir(os_path) if (isfile(join(os_path, f)))]
         return list(map(lambda image: createFileResponse(os_path, image), images))
 
+class LockUnlock(Resource):
+    def post(self, lock):
+        if lock:
+            call(["sudo", "../close_box"])
+        else:
+            call(["sudo", "../open_box"])
+
+
 api.add_resource(DirectoryListing, '/api/directory/<string:path>', '/api/directory')
 
+api.add_resource(LockUnlock, '/api/box/lock', lock = True)
+
+api.add_resource(LockUnlock, '/api/box/unlock', lock = False)
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=1338)
+    app.run(debug=False, host='0.0.0.0', port=1338)

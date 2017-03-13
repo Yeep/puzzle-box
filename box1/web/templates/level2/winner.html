@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Gallery{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}" type="application/javascript"></script>
+    <script src="{{ url_for('static', filename='gallery.js') }}" type="application/javascript"></script>
+    <script language="javascript">
+        $(document).ready(function() {
+            showGallery('pictures', $("#gallery").get(0));
+        });
+    </script>
+{% endblock %}
+{% block header %}A Picture Gallery{% endblock %}
+{% block content %}
+    <input type="button" value="Lock" id="lock_button"/>
+    <input type="button" value="Unlock" id="unlock_button"/>
+{% endblock %}
