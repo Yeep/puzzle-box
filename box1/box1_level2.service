@@ -4,10 +4,10 @@ After=syslog.target
 
 [Service]
 Type=simple
-User=puzzlebox
-Group=puzzlebox
-WorkingDirectory=/home/puzzlebox/box1/web/
-ExecStart=/usr/bin/python /home/puzzlebox/box1/web/level2.py
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/box1/web/
+ExecStart=/usr/bin/python /home/pi/box1/web/level2.py
 Restart=always
 RestartSec=2
 
