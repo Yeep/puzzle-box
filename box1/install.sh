@@ -27,5 +27,5 @@ sudo systemctl enable box1_level1.service
 sudo systemctl start box1_level1.service
 
 # Level 2 should be stopped
-sudo systemctl disable box1_level1.service
-sudo systemctl stop box1_level1.service
+sudo systemctl disable box1_level2.service
+sudo systemctl stop box1_level2.service

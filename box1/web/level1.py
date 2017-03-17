@@ -69,8 +69,8 @@ def admin():
     if 'username' not in session:
         return redirect(url_for('/'))
 
-    call(["sudo", "systemctl", "restart", "box1_level2.service"])
     call(["sudo", "systemctl", "enable", "box1_level2.service"])
+    call(["sudo", "systemctl", "start", "box1_level2.service"])
     
     return render_template('level1/admin.html', hostname=socket.gethostname(), port=1338)
 

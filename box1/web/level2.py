@@ -42,19 +42,20 @@ class DirectoryListing(Resource):
         images = [f for f in listdir(os_path) if (isfile(join(os_path, f)))]
         return list(map(lambda image: createFileResponse(os_path, image), images))
 
-class LockUnlock(Resource):
-    def post(self, lock):
-        if lock:
-            call(["sudo", "../close_box"])
-        else:
-            call(["sudo", "../open_box"])
+class Lock(Resource):
+    def post(self):
+        call(["sudo", "../close_box"])
+
+class Unlock(Resource):
+    def post(self):
+        call(["sudo", "../open_box"])
 
 
 api.add_resource(DirectoryListing, '/api/directory/<string:path>', '/api/directory')
 
-api.add_resource(LockUnlock, '/api/box/lock', lock = True)
+api.add_resource(Lock, '/api/box/lock')
 
-api.add_resource(LockUnlock, '/api/box/unlock', lock = False)
+api.add_resource(Unlock, '/api/box/unlock')
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=1338)
