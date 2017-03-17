@@ -1,16 +1,17 @@
 {% extends "layout.html" %}
-{% block title %}Gallery{% endblock %}
+{% block title %}Winner{% endblock %}
 {% block head %}
     {{ super() }}
     <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}" type="application/javascript"></script>
-    <script src="{{ url_for('static', filename='gallery.js') }}" type="application/javascript"></script>
+    <script src="{{ url_for('static', filename='lockunlock.js') }}" type="application/javascript"></script>
     <script language="javascript">
         $(document).ready(function() {
-            showGallery('pictures', $("#gallery").get(0));
+            $("#lock_button").click(function() { lock() });
+            $("#unlock_button").click(function() { unlock() });
         });
     </script>
 {% endblock %}
-{% block header %}A Picture Gallery{% endblock %}
+{% block header %}Lock and unlock the box{% endblock %}
 {% block content %}
     <input type="button" value="Lock" id="lock_button"/>
     <input type="button" value="Unlock" id="unlock_button"/>
