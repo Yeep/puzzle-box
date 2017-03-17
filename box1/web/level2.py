@@ -45,12 +45,12 @@ class DirectoryListing(Resource):
 class Lock(Resource):
     def post(self):
         if session['secret']:
-            call(["sudo", "../close_box"])
+            call(["sudo", "/home/pi/box1/close_box"])
 
 class Unlock(Resource):
     def post(self):
         if session['secret']:
-            call(["sudo", "../open_box"])
+            call(["sudo", "/home/pi/box1/open_box"])
 
 
 api.add_resource(DirectoryListing, '/api/directory/<string:path>', '/api/directory')
